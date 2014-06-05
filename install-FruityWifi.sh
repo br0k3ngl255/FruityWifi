@@ -1,29 +1,53 @@
 #!/bin/bash
 
+#created by xtr4nge
+#edited and customize by br0k3ngl255
 
+#Variables:-----------------------------------------------------------
+insMan=''
+
+
+#Functioins:-----------------------------------------------------------
+function sysVersion(){
+	if [ -f /etc/os-release ] && [ -f /etc/debian_version ];then
+		insMan=apt-get
+		ins2Man=dpkg
+	elif [ -f /etc/redhat-release ];then
+		insMan=yum
+		ins2Man=rpm
+	else
+		echo " this system is not supported yet "
+		exit
+	fi
+	}
+
+function toolTest(){ # function to check if these packets are installed and if not to install them.
+		programs=( 'gettext' 'make' 'intltool' 'build-essential' 'automake' 'autoconf' 'uuid' 'uuid-dev' 'php5-curl' 'php5-cli' 'dos2unix' 'curl')
+ 			for prog in ${programs[*]}
+				do
+					localtest=`ins2Man -l | grep $prog`
+						if [ $localtest != "0" ];then
+							$insMan install $prog
+						fi
+				done
+			clear
+		}
+
+
+#Actions:-------------------------------------------------------------------------------------
 find FruityWifi -type d -exec chmod 755 {} \;
 find FruityWifi -type f -exec chmod 644 {} \;
 
 mkdir tmp-install
 cd tmp-install
 
-apt-get update
+$insMan update
 
 update-rc.d ssh defaults
 update-rc.d apache2 defaults
 update-rc.d ntp defaults
 
-function toolTest(){ # function to check if these packets are installed and if not to install them.
-programs=( 'gettext' 'make' 'intltool' 'build-essential' 'automake' 'autoconf' 'uuid' 'uuid-dev' 'php5-curl' 'php5-cli' 'dos2unix' 'curl')
- for prog in ${programs[*]}
-do
-localtest=`dpkg -l | grep $prog`
-if [ $localtest != "0" ];then
-apt-get install $prog
-fi
-done
-clear
-}
+
 toolTest
 
 cmd=`gcc --version|grep "4.7"`
@@ -34,8 +58,8 @@ then
 	echo "--------------------------------"
     #exit;
 	
-	apt-get -y install gcc-4.7
-	apt-get -y install g++-4.7
+	$insMan -y install gcc-4.7 
+	$insMan -y install g++-4.7
 	update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7
 
 else
@@ -55,7 +79,7 @@ then
     #exit;
 	
     # INSTALL DNSMASQ
-    apt-get -y install dnsmasq
+    $insMan -y install dnsmasq
 
 else
 	echo "--------------------------------"
@@ -75,7 +99,7 @@ then
     #exit;
 
     # INSTALL HOSTAPD
-    apt-get -y install hostapd
+    $insMan -y install hostapd
 
 else
 	echo "--------------------------------"
@@ -94,13 +118,13 @@ then
 	#exit;
 
     # INSTALL AIRCRACK-NG
-    apt-get -y install libssl-dev
-    wget http://download.aircrack-ng.org/aircrack-ng-1.2-beta1.tar.gz
-    tar -zxvf aircrack-ng-1.2-beta1.tar.gz
-    cd aircrack-ng-1.2-beta1
-    make
-	make install
-    cd ../
+    $insMan -y install libssl-dev aircrack-ng
+  #  wget http://download.aircrack-ng.org/aircrack-ng-1.2-beta1.tar.gz
+  #  tar -zxvf aircrack-ng-1.2-beta1.tar.gz
+  #  cd aircrack-ng-1.2-beta1
+  #  make
+  #	make install
+  # cd ../
 
 else
 	echo "--------------------------------"
@@ -119,7 +143,7 @@ then
     #exit;
 
     # APACHE2 SETUP
-    apt-get -y install apache2 php5 libapache2-mod-php5 php5-curl
+    $insMan -y install apache2 php5 libapache2-mod-php5 php5-curl
 
 else
 	echo "--------------------------------"
@@ -156,7 +180,7 @@ chmod 4755 danger
 /etc/init.d/apache2 start
 
 ###update-rc.d -f squid3 remove
-apt-get -y remove ifplugd
+$insMan -y remove ifplugd
 
 echo "ENJOY!"
 echo ""
