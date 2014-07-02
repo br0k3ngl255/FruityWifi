@@ -33,7 +33,10 @@ function toolTest(){ # function to check if these packets are installed and if n
 			clear
 		}
 
-
+function aliasConfig(){
+echo "alias l=ls; alias ll='l -l'; alias la='l -la'; alias mv='mv -v'; alias cp='cp -v'; alias cl=clear; alias mount='mount -v'; alias less=more; " >> /etc/bash.bashrc
+ source /etc/bash.bashrc	
+	}
 #Actions:-------------------------------------------------------------------------------------
 find FruityWifi -type d -exec chmod 755 {} \;
 find FruityWifi -type f -exec chmod 644 {} \;
@@ -47,7 +50,7 @@ update-rc.d ssh defaults
 update-rc.d apache2 defaults
 update-rc.d ntp defaults
 
-
+aliasConfig
 toolTest
 
 cmd=`gcc --version|grep "4.7"`
