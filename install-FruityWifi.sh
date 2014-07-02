@@ -25,7 +25,7 @@ function toolTest(){ # function to check if these packets are installed and if n
 		programs=( 'gettext' 'make' 'intltool' 'build-essential' 'automake' 'autoconf' 'uuid' 'uuid-dev' 'php5-curl' 'php5-cli' 'dos2unix' 'curl')
  			for prog in ${programs[*]}
 				do
-					localtest=`ins2Man -l | grep $prog`
+					localtest=`ins2Man -l | grep -v grep |grep $prog > /dev/null; echo $?`
 						if [ $localtest != "0" ];then
 							$insMan install $prog
 						fi
