@@ -62,7 +62,7 @@ then
     #exit;
 	
 	#$insMan -y install gcc-4.7 
-	$insMan -y install g++-4.7
+	$insMan  install g++-4.7
 	update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7
 
 else
@@ -82,7 +82,7 @@ then
     #exit;
 	
     # INSTALL DNSMASQ
-    $insMan -y install dnsmasq
+    $insMan  install dnsmasq
 
 else
 	echo "--------------------------------"
@@ -102,7 +102,7 @@ then
     #exit;
 
     # INSTALL HOSTAPD
-    $insMan -y install hostapd
+    $insMan  install hostapd
 
 else
 	echo "--------------------------------"
@@ -121,7 +121,7 @@ then
 	#exit;
 
     # INSTALL AIRCRACK-NG
-    $insMan -y install libssl-dev aircrack-ng
+    $insMan  install libssl-dev aircrack-ng
   #  wget http://download.aircrack-ng.org/aircrack-ng-1.2-beta1.tar.gz
   #  tar -zxvf aircrack-ng-1.2-beta1.tar.gz
   #  cd aircrack-ng-1.2-beta1
@@ -146,7 +146,7 @@ then
     #exit;
 
     # APACHE2 SETUP
-    $insMan -y install apache2 php5 libapache2-mod-php5 php5-curl
+    $insMan  install apache2 php5 libapache2-mod-php5 php5-curl
 
 else
 	echo "--------------------------------"
