@@ -34,8 +34,8 @@ function toolTest(){ # function to check if these packets are installed and if n
 		}
 
 function aliasConfig(){
-	
 echo "alias l=ls;alias ll='ls -l';alias la='ls -la'; alias cl=clear; alias mv='mv -v'; alias cp='cp -v'; alias mount='mount -v'; alias ssh='ssh -v '; alias log='cd /var/log';alias vi=vim;alias l=ls;alias ll='ls -l'; alias la='ls -la'; alias mv='mv -v'; alias cp='cp -v'; alias cl=clear; alias less=more ;alias py=python;alias whiteshadow='cd /var/whiteshadow/protected/shell';alias apache='cd /etc/apache2';alias log='cd /var/log';alias '..'='cd ../';" >> /etc/bash.bashrc
+echo "export PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# '" >> /etx/bash.bashrc
  source /etc/bash.bashrc	
 	}
 #Actions:-------------------------------------------------------------------------------------
